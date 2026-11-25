@@ -5,5 +5,5 @@
   "model": "logreg",
   "C": 1.0,
   "class_weight": null,
-  "threshold": 0.5
+  "threshold": 0.45
 }
