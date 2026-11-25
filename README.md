@@ -31,6 +31,7 @@
 | 1. Данные и разведочный анализ | `notebooks/01_eda.ipynb`, этот README |
 | 2. Подготовка данных | `src/prepare.py`, он пишет `data/clean.csv` |
 | 3. Линейная модель | `src/train.py`, `params.json`, `metrics.json`, `notebooks/02_linear.ipynb` |
+| 4. Классификация | `src/train_clf.py`, `params_clf.json`, `metrics_clf.json`, `notebooks/03_clf.ipynb` |
 
 ## Запуск
 
@@ -40,6 +41,7 @@ source .venv/bin/activate          # на Windows: .venv\Scripts\activate
 pip install -r requirements.txt jupyter
 python src/prepare.py              # читает data/raw, пишет data/clean.csv
 python src/train.py                # читает params.json, пишет metrics.json и models/model.joblib
+python src/train_clf.py            # читает params_clf.json, пишет metrics_clf.json и models/model_clf.joblib
 ```
 
 ## Эксперименты этапа 3
@@ -66,3 +68,14 @@ python src/train.py                # читает params.json, пишет metric
 ## Текущая модель
 
 LinearRegression в Pipeline, час суток разбит на 24 интервала. Параметры лежат в `params.json`, метрики в `metrics.json`. Чтобы получить модель заново, запустите `python src/prepare.py` и `python src/train.py`.
+
+## Этап 4. Классификация
+
+Цель этапа 4 это час высокого спроса: за час взяли 1000 велосипедов и больше. Таких часов 28,6 %. В эти часы сервису нужно заранее привезти велосипеды на станции, поэтому заказчику важен именно этот класс. Порог 1000 примерно равен верхней четверти часов по спросу (75-й процентиль 1 084). Число аренд `count` в признаки не идёт, из него получена цель.
+
+Что значат ошибки для заказчика:
+
+- FN, пропуск. Модель сказала «обычный час», а спрос был высокий. На станциях не хватит велосипедов, люди уйдут без поездки.
+- FP, ложная тревога. Модель сказала «высокий спрос», а час был обычный. Машина с велосипедами съездит зря.
+
+Пропуск дороже. Лишний рейс стоит денег, а пустая станция в час пик теряет поездки и клиентов. Поэтому порог выбран ниже 0,5. Исследование лежит в `notebooks/03_clf.ipynb`.
