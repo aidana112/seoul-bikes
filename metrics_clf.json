@@ -1,10 +1,10 @@
 {
-  "cv_f1": 0.7906,
-  "cv_roc_auc": 0.9419,
-  "cv_precision": 0.7496,
-  "cv_recall": 0.8364,
-  "test_accuracy": 0.8786,
-  "test_precision": 0.7628,
-  "test_recall": 0.8347,
-  "test_f1": 0.7972
+  "cv_f1": 0.7741,
+  "cv_roc_auc": 0.9407,
+  "cv_precision": 0.6597,
+  "cv_recall": 0.9366,
+  "test_accuracy": 0.8446,
+  "test_precision": 0.6608,
+  "test_recall": 0.9372,
+  "test_f1": 0.7751
 }

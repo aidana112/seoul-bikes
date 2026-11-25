@@ -4,6 +4,6 @@
   "hour_bins": 24,
   "model": "logreg",
   "C": 1.0,
-  "class_weight": null,
+  "class_weight": "balanced",
   "threshold": 0.45
 }
